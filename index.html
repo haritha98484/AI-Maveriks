@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question Answering System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.8em;
+        }
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        input[type="file"] {
+            margin-bottom: 15px;
+            display: block;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #results, #fileReport {
+            margin-top: 20px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.9em;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        AI-MAVERIKS
+    </header>
+    <div class="container">
+        <h2>Upload Files</h2>
+        <p>Upload the questions file and the answers file to process and validate answers.</p>
+        <label for="questionsFile">Questions File:</label>
+        <input type="file" id="questionsFile" accept=".txt">
+        <label for="answersFile">Answers File:</label>
+        <input type="file" id="answersFile" accept=".txt">
+        <button onclick="processFiles()">Process Files</button>
+        <div id="results">
+            <h3>Results:</h3>
+            <pre id="output">No results yet.</pre>
+        </div>
+        <div id="fileReport">
+            <h3>File Report:</h3>
+            <pre id="reportOutput">No report available.</pre>
+        </div>
+        <button id="downloadButton" style="display: none;" onclick="downloadUpdatedFile()">Download Updated File</button>
+    </div>
+    <footer>
+        &copy; 2025 Question Answering System. All rights reserved.
+    </footer>
+    <script>
+        function processFiles() {
+            const questionsFile = document.getElementById('questionsFile').files[0];
+            const answersFile = document.getElementById('answersFile').files[0];
+            const output = document.getElementById('output');
+            const reportOutput = document.getElementById('reportOutput');
+            const downloadButton = document.getElementById('downloadButton');
+
+            if (!questionsFile || !answersFile) {
+                output.textContent = 'Please upload both files.';
+                return;
+            }
+
+            output.textContent = 'Processing files...';
+            reportOutput.textContent = 'Generating file report...';
+
+            // Simulate processing (replace this with actual backend integration)
+            setTimeout(() => {
+                output.textContent = 'Files processed successfully. Results are displayed below.';
+                reportOutput.textContent = 'File report generated successfully.';
+                downloadButton.style.display = 'block';
+            }, 2000);
+        }
+
+        function downloadUpdatedFile() {
+            const updatedContent = "Updated questions with True/False labels and reasoning."; // Replace with actual content
+            const blob = new Blob([updatedContent], { type: 'text/plain' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'updated_questions.txt';
+            link.click();
+        }
+    </script>
+</body>
+</html>
